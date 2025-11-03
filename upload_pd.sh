@@ -7,18 +7,20 @@
 cd "$(dirname "$0")"
 
 # Default commit message if none provided
-COMMIT_MSG=${1:-"Update image and markdown files"}
+timestamp=$(date +"%Y-%m-%d %H:%M")
+msg=${1:-"Auto-upload on $timestamp"}
 
 # Add all tracked and new files (except ignored ones)
-git add telehealth/. drugdetailing/.  haodf/.  healthdta/.  temp/.
+git add -A
 
 # Commit with the provided message
-git commit -m "$COMMIT_MSG"
+git commit -m "$msg"
 
 # Push to GitHub
 git push origin main
 
 # Show current repo status
 echo "✅ Upload complete!"
-git status
+
+# git status
 
